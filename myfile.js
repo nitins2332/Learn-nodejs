@@ -1,5 +1,5 @@
 // var http = require("http");
-var url = require("url");
+// var url = require("url");
 // var dt = require("./myModule");
 
 // http
@@ -27,26 +27,25 @@ var url = require("url");
 //   return Data();
 // };
 
-var http = require("http");
-var fs = require("fs");
+// var http = require("http");
+// var fs = require("fs");
 
-http
-  .createServer(function (req, res) {
-    // fs.appendFile(
-    //   "demofile02.html",
-    //   "Hello This is demo file 02",
-    //   function (err) {
-    //     if (err) throw err;
-    //     console.log("Saved!");
-    //   }
-    // );
-    // fs.open("demofile03.txt", "w", function (err, file) {
-    //   if (err) throw err;
-    //   console.log("Saved!");
-    // });
-    // fs.unlink("demofile03.txt", function (err) {
-    //   if (err) throw err;
-    //   console.log("file deleted");
-    // });
-  })
-  .listen(8080);
+// http.createServer(function (req, res) {
+// fs.appendFile(
+//   "demofile02.html",
+//   "Hello This is demo file 02",
+//   function (err) {
+//     if (err) throw err;
+//     console.log("Saved!");
+//   }
+// );
+// fs.open("demofile03.txt", "w", function (err, file) {
+//   if (err) throw err;
+//   console.log("Saved!");
+// });
+// fs.unlink("demofile03.txt", function (err) {
+//   if (err) throw err;
+//   console.log("file deleted");
+// });
+// });
+//   .listen(8080);
