@@ -182,7 +182,7 @@
 // console.log(sub(12, 5));
 // console.log(add);
 
-const chalk = require("chalk");
+// const chalk = require("chalk");
 
 // console.log(chalk.blue);
 // console.log(chalk.blue("Hello world!"));
@@ -192,10 +192,23 @@ const chalk = require("chalk");
 
 // console.log(chalk.green.underline.inverse("success"));
 
-var validator = require("validator");
+// var validator = require("validator");
 
 // const a = validator.isEmail("foo@bar.com");
 // console.log(a);
 
-const res = validator.isEmail("nitin@ns.com");
-console.log(res ? chalk.green.inverse(res) : chalk.red.inverse(res));
+// const res = validator.isEmail("nitin@ns.com");
+// console.log(res ? chalk.green.inverse(res) : chalk.red.inverse(res));
+
+// const name = "Nitins";
+// console.log(name);
+
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.end("Hello from the other sides");
+});
+
+server.listen(8000, "127.0.0.1", () => {
+  console.log("listening to the port no 8000");
+});
