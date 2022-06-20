@@ -138,3 +138,46 @@
 // fs.rmdir("./thapa", (err) => {
 //   console.log("folder is deleted");
 // });
+
+// const os = require("os");
+// console.log(os.arch());
+// const freeMemory = os.totalmem();
+// console.log(`${freeMemory / 1024 / 1024 / 1024}`);
+
+// console.log(os.hostname());
+// console.log(os.platform());
+
+// console.log(os.tmpdir());
+
+// console.log(os.type());
+
+// const path = require("path");
+
+// console.log(path.dirname("D:/React JS Folder/Learn nodejs/myfile.js"));
+
+// console.log(path.extname("myfile.js"));
+// console.log(path.basename("D:/React JS Folder/Learn nodejs/myfile.js"));
+
+// console.log(path.parse("D:/React JS Folder/Learn nodejs/myfile.js").name);
+
+// const myPath = path.parse("D:/React JS Folder/Learn nodejs/myfile.js");
+// console.log(myPath.root);
+
+// console.log(path.join("/foo", "bar", "baz/asdf", "quux", ".."));
+
+// console.log(path.join("foo", "{}", "bar"));
+
+// const name = require("./myModule");
+
+// console.log(add(5, 5));
+// console.log(name);
+
+const { add, sub, name } = require("./myModule");
+
+// console.log(modules);
+console.log(add(5, 5));
+console.log(sub(10, 4));
+console.log(name);
+// console.log(add(5, 5));
+// console.log(sub(12, 5));
+// console.log(add);
