@@ -242,11 +242,11 @@
 
 // {"name":"nitin","age":345,"channel":"thapa tech"}
 
-const bioData = {
-  name: "nitin",
-  age: 345,
-  channel: "thapa tech",
-};
+// const bioData = {
+//   name: "nitin",
+//   age: 345,
+//   channel: "thapa tech",
+// };
 
 // 1: convert to JSON
 // 2: dusre file me add krna
@@ -254,18 +254,48 @@ const bioData = {
 // 4: again convert to js obj file
 // 5: console.log
 
-const fs = require("fs");
+// const fs = require("fs");
 
-const jsonData = JSON.stringify(bioData);
+// const jsonData = JSON.stringify(bioData);
 
 // fs.writeFile("json1.json", jsonData, (err) => {
 //   console.log("done");
 // });
 
-fs.readFile("json1.json", "utf8", (err, data) => {
-  // if (err) throw err;
-  // console.log(data);
-  const orgData = JSON.parse(data);
-  console.log(data);
-  console.log(orgData);
+// fs.readFile("json1.json", "utf8", (err, data) => {
+// if (err) throw err;
+// console.log(data);
+//   const orgData = JSON.parse(data);
+//   console.log(data);
+//   console.log(orgData);
+// });
+
+const http = require("http");
+const fs = require("fs");
+
+const server = http.createServer((req, res) => {
+  if (req.url == "/") {
+    res.end("Hello from the home sides");
+  }
+  //  else if (req.url == "/about") {
+  //   res.end("Hello from the about page");
+  // } else if (req.url == "/contact") {
+  //   res.end("Hello from the contact page");
+  // } else if (req.url == "/biome") {
+  //   res.end("Hello from the biome page");
+  // }
+  else if (req.url == "/userapi") {
+    fs.readFile("./userapi.json", "utf8", (err, data) => {
+      console.log(data);
+      const objData = JSON.parse(data);
+      res.end(objData[0].name);
+    });
+  } else {
+    res.writeHead(404, { "Content-type": "text/html" });
+    res.end("404, page not found");
+  }
+});
+
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listening to the port no 8000");
 });
