@@ -172,12 +172,30 @@
 // console.log(add(5, 5));
 // console.log(name);
 
-const { add, sub, name } = require("./myModule");
+// const { add, sub, name } = require("./myModule");
 
 // console.log(modules);
-console.log(add(5, 5));
-console.log(sub(10, 4));
-console.log(name);
+// console.log(add(5, 5));
+// console.log(sub(10, 4));
+// console.log(name);
 // console.log(add(5, 5));
 // console.log(sub(12, 5));
 // console.log(add);
+
+const chalk = require("chalk");
+
+// console.log(chalk.blue);
+// console.log(chalk.blue("Hello world!"));
+
+// import chalk from "chalk";
+// const chalk = require("chalk");
+
+// console.log(chalk.green.underline.inverse("success"));
+
+var validator = require("validator");
+
+// const a = validator.isEmail("foo@bar.com");
+// console.log(a);
+
+const res = validator.isEmail("nitin@ns.com");
+console.log(res ? chalk.green.inverse(res) : chalk.red.inverse(res));

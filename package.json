@@ -1,0 +1,23 @@
+{
+  "name": "learn-nodejs",
+  "version": "1.0.0",
+  "description": "Thapa technical node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitins2332/Learn-nodejs.git"
+  },
+  "author": "nitins2332",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nitins2332/Learn-nodejs/issues"
+  },
+  "homepage": "https://github.com/nitins2332/Learn-nodejs#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "validator": "^13.7.0"
+  }
+}
