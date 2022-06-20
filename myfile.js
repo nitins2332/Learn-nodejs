@@ -203,23 +203,69 @@
 // const name = "Nitins";
 // console.log(name);
 
-const http = require("http");
-const url = require("url");
+// const http = require("http");
+// const url = require("url");
 
-const server = http.createServer((req, res) => {
-  //   console.log(req.url);
-  if (req.url == "/") {
-    res.end("Hello from the home side");
-  } else if (req.url == "/about") {
-    res.end("Hello from the about side");
-  } else if (req.url == "/contact") {
-    res.end("Hello from the contact side");
-  } else {
-    res.writeHead(404, { "content-type": "text/html" });
-    res.end("<h1>page not found</h1>");
-  }
-});
+// const server = http.createServer((req, res) => {
+//   console.log(req.url);
+//   if (req.url == "/") {
+//     res.end("Hello from the home side");
+//   } else if (req.url == "/about") {
+//     res.end("Hello from the about side");
+//   } else if (req.url == "/contact") {
+//     res.end("Hello from the contact side");
+//   } else {
+//     res.writeHead(404, { "content-type": "text/html" });
+//     res.end("<h1>page not found</h1>");
+//   }
+// });
 
-server.listen(8000, "127.0.0.1", () => {
-  console.log("listening to the port no 8000");
+// server.listen(8000, "127.0.0.1", () => {
+//   console.log("listening to the port no 8000");
+// });
+
+// const bioData = {
+//   name: "nitin",
+//   age: 345,
+//   channel: "thapa tech",
+// };
+
+// console.log(bioData.channel);
+
+// const jsonData = JSON.stringify(bioData);
+// const objData = JSON.parse(jsonData);
+
+// console.log(jsonData);
+// console.log(objData);
+
+// console.log(jsonData.channel);
+
+// {"name":"nitin","age":345,"channel":"thapa tech"}
+
+const bioData = {
+  name: "nitin",
+  age: 345,
+  channel: "thapa tech",
+};
+
+// 1: convert to JSON
+// 2: dusre file me add krna
+// 3: readfile
+// 4: again convert to js obj file
+// 5: console.log
+
+const fs = require("fs");
+
+const jsonData = JSON.stringify(bioData);
+
+// fs.writeFile("json1.json", jsonData, (err) => {
+//   console.log("done");
+// });
+
+fs.readFile("json1.json", "utf8", (err, data) => {
+  // if (err) throw err;
+  // console.log(data);
+  const orgData = JSON.parse(data);
+  console.log(data);
+  console.log(orgData);
 });
