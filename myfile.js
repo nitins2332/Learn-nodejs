@@ -270,32 +270,57 @@
 //   console.log(orgData);
 // });
 
-const http = require("http");
-const fs = require("fs");
+// const http = require("http");
+// const fs = require("fs");
 
-const server = http.createServer((req, res) => {
-  if (req.url == "/") {
-    res.end("Hello from the home sides");
-  }
-  //  else if (req.url == "/about") {
-  //   res.end("Hello from the about page");
-  // } else if (req.url == "/contact") {
-  //   res.end("Hello from the contact page");
-  // } else if (req.url == "/biome") {
-  //   res.end("Hello from the biome page");
-  // }
-  else if (req.url == "/userapi") {
-    fs.readFile("./userapi.json", "utf8", (err, data) => {
-      console.log(data);
-      const objData = JSON.parse(data);
-      res.end(objData[0].name);
-    });
-  } else {
-    res.writeHead(404, { "Content-type": "text/html" });
-    res.end("404, page not found");
-  }
+// const server = http.createServer((req, res) => {
+//   if (req.url == "/") {
+//     res.end("Hello from the home sides");
+//   }
+//  else if (req.url == "/about") {
+//   res.end("Hello from the about page");
+// } else if (req.url == "/contact") {
+//   res.end("Hello from the contact page");
+// } else if (req.url == "/biome") {
+//   res.end("Hello from the biome page");
+// }
+//   else if (req.url == "/userapi") {
+//     fs.readFile("./userapi.json", "utf8", (err, data) => {
+//       console.log(data);
+//       const objData = JSON.parse(data);
+//       res.end(objData[0].name);
+//     });
+//   } else {
+//     res.writeHead(404, { "Content-type": "text/html" });
+//     res.end("404, page not found");
+//   }
+// });
+
+// server.listen(8000, "127.0.0.1", () => {
+//   console.log("Listening to the port no 8000");
+// });
+
+const { ok } = require("assert");
+const EventEmitter = require("events");
+
+const event = new EventEmitter();
+
+// event.on("sayMyName", () => {
+//   console.log("Your name is nitin");
+// });
+
+// event.on("sayMyName", () => {
+//   console.log("Your name is NS");
+// });
+
+// event.on("sayMyName", () => {
+//   console.log("Your name is sutrakar");
+// });
+
+event.on("checkpage", (scc, msg) => {
+  console.log(`status code is ${sc} and the page is ${msg}`);
 });
 
-server.listen(8000, "127.0.0.1", () => {
-  console.log("Listening to the port no 8000");
-});
+event.emit("checkpage", 200, "ok");
+
+// myName(200, ok)
