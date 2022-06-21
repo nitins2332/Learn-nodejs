@@ -300,10 +300,10 @@
 //   console.log("Listening to the port no 8000");
 // });
 
-const { ok } = require("assert");
-const EventEmitter = require("events");
+// const { ok } = require("assert");
+// const EventEmitter = require("events");
 
-const event = new EventEmitter();
+// const event = new EventEmitter();
 
 // event.on("sayMyName", () => {
 //   console.log("Your name is nitin");
@@ -317,10 +317,34 @@ const event = new EventEmitter();
 //   console.log("Your name is sutrakar");
 // });
 
-event.on("checkpage", (scc, msg) => {
-  console.log(`status code is ${sc} and the page is ${msg}`);
-});
+// event.on("checkpage", (scc, msg) => {
+//   console.log(`status code is ${sc} and the page is ${msg}`);
+// });
 
-event.emit("checkpage", 200, "ok");
+// event.emit("checkpage", 200, "ok");
 
 // myName(200, ok)
+
+const fs = require("fs");
+const http = require("http");
+
+const server = http.createServer();
+
+server.on("request", (req, res) => {
+  // var fs = require("fs");
+  // fs.readFile("read.txt", (err, data) => {
+  //   if (err) return console.log(err);
+  //   res.end(data.toString());
+  // });
+
+  // 2nd way
+  const rstream = fs.createReadStream("read.txt");
+  rstream.on("data", (chunkdata) => {
+    res.write(chunkdata);
+  });
+  rstream.on("end", () => {
+    res.end();
+  });
+});
+
+server.listen(8000, "127.0.0.1");
