@@ -338,13 +338,17 @@ server.on("request", (req, res) => {
   // });
 
   // 2nd way
+  // const rstream = fs.createReadStream("read.txt");
+  // rstream.on("data", (chunkdata) => {
+  //   res.write(chunkdata);
+  // });
+  // rstream.on("end", () => {
+  //   res.end();
+  // });
+
+  // 3rd way
   const rstream = fs.createReadStream("read.txt");
-  rstream.on("data", (chunkdata) => {
-    res.write(chunkdata);
-  });
-  rstream.on("end", () => {
-    res.end();
-  });
+  rstream.pipe(res);
 });
 
 server.listen(8000, "127.0.0.1");
