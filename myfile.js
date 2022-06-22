@@ -393,6 +393,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const hbs = require("hbs");
 const port = 4000;
 
 // console.log(__dirname);
@@ -404,11 +405,13 @@ const port = 4000;
 
 // console.log(path.join(__dirname, "./public"));
 const staticPath = path.join(__dirname, "./public");
-const templatePath = path.join(__dirname, "./template");
+const templatePath = path.join(__dirname, "./template/views");
+const partialsPath = path.join(__dirname, "./template/partials");
 
 // to set the view engine
 app.set("view engine", "hbs");
 app.set("views", templatePath);
+hbs.registerPartials(partialsPath);
 
 // app.use(express.static(staticPath));
 
@@ -423,9 +426,9 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello welcome to my home page</h1>");
-});
+// app.get("/", (req, res) => {
+//   res.send("<h1>Hello welcome to my home page</h1>");
+// });
 
 // app.get("/temp", (req, res) => {
 //   res.send({
