@@ -405,7 +405,17 @@ const port = 4000;
 // console.log(path.join(__dirname, "./public"));
 const staticPath = path.join(__dirname, "./public");
 
-app.use(express.static(staticPath));
+// to set the view engine
+app.set("view engine", "hbs");
+
+// app.use(express.static(staticPath));
+
+// template engine route
+app.get("/", (req, res) => {
+  res.render("index", {
+    channelName: "nitins",
+  });
+});
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello welcome to my home page</h1>");
