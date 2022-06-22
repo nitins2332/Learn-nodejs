@@ -426,6 +426,10 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
+app.get("*", (req, res) => {
+  res.render("404");
+});
+
 // app.get("/", (req, res) => {
 //   res.send("<h1>Hello welcome to my home page</h1>");
 // });
