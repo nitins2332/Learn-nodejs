@@ -391,19 +391,32 @@
 // });
 
 const express = require("express");
+const path = require("path");
 const app = express();
 const port = 4000;
+
+// console.log(__dirname);
+// console.log(path.join(__dirname, "/public"));
+
+// const staticPath = path.join(__dirname, "/public");
+
+// app.use(express.static(staticPath));
+
+// console.log(path.join(__dirname, "./public"));
+const staticPath = path.join(__dirname, "./public");
+
+app.use(express.static(staticPath));
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello welcome to my home page</h1>");
 });
 
-app.get("/temp", (req, res) => {
-  res.send({
-    id: 1,
-    name: "vinod",
-  });
-});
+// app.get("/temp", (req, res) => {
+//   res.send({
+//     id: 1,
+//     name: "vinod",
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`server is running on ${port}`);
