@@ -350,3 +350,18 @@
 // });
 
 // server.listen(8000, "127.0.0.1");
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello from the express");
+});
+
+app.get("/about", (req, res) => {
+  res.send("hello from the about page");
+});
+
+app.listen(4000, () => {
+  console.log("listing the port at 4000");
+});
