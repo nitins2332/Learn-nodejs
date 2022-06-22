@@ -351,17 +351,42 @@
 
 // server.listen(8000, "127.0.0.1");
 
+// const express = require("express");
+// const app = express();
+
+// app.get("/", (req, res) => {
+//   res.send("Hello from the express");
+// });
+
+// app.get("/about", (req, res) => {
+//   res.send("hello from the about page");
+// });
+
+// app.listen(4000, () => {
+//   console.log("listing the port at 4000");
+// });
+
 const express = require("express");
 const app = express();
 
+const Port = 4000;
+
 app.get("/", (req, res) => {
-  res.send("Hello from the express");
+  res.send("Hello welcome to my home page");
 });
 
 app.get("/about", (req, res) => {
-  res.send("hello from the about page");
+  res.send("Hello welcome to my about page");
 });
 
-app.listen(4000, () => {
-  console.log("listing the port at 4000");
+app.get("/contact", (req, res) => {
+  res.send("Hello welcome to my contact page");
+});
+
+app.get("/temp", (req, res) => {
+  res.send("Hello welcome to my temp page");
+});
+
+app.listen(Port, () => {
+  console.log(`Listing the port at ${Port}`);
 });
