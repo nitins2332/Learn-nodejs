@@ -366,27 +366,45 @@
 //   console.log("listing the port at 4000");
 // });
 
+// const express = require("express");
+// const app = express();
+
+// const Port = 4000;
+
+// app.get("/", (req, res) => {
+//   res.send("Hello welcome to my home page");
+
+// app.get("/about", (req, res) => {
+//   res.send("Hello welcome to my about page");
+// });
+
+// app.get("/contact", (req, res) => {
+//   res.send("Hello welcome to my contact page");
+// });
+
+// app.get("/temp", (req, res) => {
+//   res.send("Hello welcome to my temp page");
+// });
+
+// app.listen(Port, () => {
+//   console.log(`Listing the port at ${Port}`);
+// });
+
 const express = require("express");
 const app = express();
-
-const Port = 4000;
+const port = 4000;
 
 app.get("/", (req, res) => {
-  res.send("Hello welcome to my home page");
-});
-
-app.get("/about", (req, res) => {
-  res.send("Hello welcome to my about page");
-});
-
-app.get("/contact", (req, res) => {
-  res.send("Hello welcome to my contact page");
+  res.send("<h1>Hello welcome to my home page</h1>");
 });
 
 app.get("/temp", (req, res) => {
-  res.send("Hello welcome to my temp page");
+  res.send({
+    id: 1,
+    name: "vinod",
+  });
 });
 
-app.listen(Port, () => {
-  console.log(`Listing the port at ${Port}`);
+app.listen(port, () => {
+  console.log(`server is running on ${port}`);
 });
