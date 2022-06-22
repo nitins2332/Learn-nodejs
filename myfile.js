@@ -404,9 +404,11 @@ const port = 4000;
 
 // console.log(path.join(__dirname, "./public"));
 const staticPath = path.join(__dirname, "./public");
+const templatePath = path.join(__dirname, "./template");
 
 // to set the view engine
 app.set("view engine", "hbs");
+app.set("views", templatePath);
 
 // app.use(express.static(staticPath));
 
@@ -415,6 +417,10 @@ app.get("/", (req, res) => {
   res.render("index", {
     channelName: "nitins",
   });
+});
+
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 
 app.get("/", (req, res) => {
