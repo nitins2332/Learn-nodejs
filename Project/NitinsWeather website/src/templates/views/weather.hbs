@@ -1,0 +1,102 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    {{>navbar}}
+
+    <!-- main page -->
+    <h2>This is weather page</h2>
+    <form action="">
+        <input type="text" id="cityName" placeholder="Enter your city name" autocomplete="off">
+        <input type="submit" value="search" id="submitBtn">
+    </form>
+
+    <div class="tempinfo">
+        <p>CITY NAME :</p>
+        <p id="city_name">Get output here</p>
+        <div class="data_hide">
+            <p>TEMPRATURE : </p>
+            <p id="temp"><span>0</span><sup>o</sup>C</p>
+            <p>CLOUD CANDITION :</p>
+            <p id="temp_status"> cloud image</p>
+        </div>
+    </div>
+
+    <div class="dayinfo">
+        <h3>Today day :</h3>
+        <p id="day">Monday</p>
+        <h3>Today date :</h3>
+        <p id="today_date">13 oct</p>
+    </div>
+    <!-- Footer -->
+    {{>footer}}
+
+    <script>
+        const cityName = document.getElementById("cityName")
+        const submitBtn = document.getElementById("submitBtn");
+        const city_name = document.getElementById("city_name")
+        const temp_status = document.getElementById("temp_status")
+        const temp = document.getElementById("temp")
+
+        const day = document.getElementById("day")
+        const today_date = document.getElementById("today_date")
+
+        const getInfo = async(event) => {
+            event.preventDefault()
+            let cityVal = cityName.value
+            if(cityVal === ""){
+                city_name.innerText = `Plz write the name before search`
+            }else{
+                try{
+
+                let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&appid=e45a5a3d3ade50ed1680ca941ca3e69b`
+                const response = await fetch(url)
+                const data = await response.json()
+                const arrData = [data]
+
+                console.log(data)
+
+                city_name.innerText = `${arrData[0].name}, ${arrData[0].sys.country}`
+                temp.innerText = arrData[0].main.temp
+                temp_status.innerText = arrData[0].weather[0].description
+
+                }
+                catch{
+                    city_name.innerText = `Plz enter the city name properly`
+                }
+            }
+        };
+
+    submitBtn.addEventListener("click", getInfo);
+
+        {{!-- today date --}}
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        {{!-- document.write(today); --}}
+        today_date.innerText = today
+
+        {{!-- current day --}}
+
+        const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+        const d = new Date();
+        let today_day = weekday[d.getDay()];
+
+        day.innerText = today_day
+
+
+
+    </script>
+  </body>
+</html>
