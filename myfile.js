@@ -390,11 +390,11 @@
 //   console.log(`Listing the port at ${Port}`);
 // });
 
-const express = require("express");
-const path = require("path");
-const app = express();
-const hbs = require("hbs");
-const port = 4000;
+// const express = require("express");
+// const path = require("path");
+// const app = express();
+// const hbs = require("hbs");
+// const port = 4000;
 
 // console.log(__dirname);
 // console.log(path.join(__dirname, "/public"));
@@ -404,31 +404,31 @@ const port = 4000;
 // app.use(express.static(staticPath));
 
 // console.log(path.join(__dirname, "./public"));
-const staticPath = path.join(__dirname, "./public");
-const templatePath = path.join(__dirname, "./template/views");
-const partialsPath = path.join(__dirname, "./template/partials");
+// const staticPath = path.join(__dirname, "./public");
+// const templatePath = path.join(__dirname, "./template/views");
+// const partialsPath = path.join(__dirname, "./template/partials");
 
 // to set the view engine
-app.set("view engine", "hbs");
-app.set("views", templatePath);
-hbs.registerPartials(partialsPath);
+// app.set("view engine", "hbs");
+// app.set("views", templatePath);
+// hbs.registerPartials(partialsPath);
 
 // app.use(express.static(staticPath));
 
 // template engine route
-app.get("/", (req, res) => {
-  res.render("index", {
-    channelName: "nitins",
-  });
-});
+// app.get("/", (req, res) => {
+//   res.render("index", {
+//     channelName: "nitins",
+//   });
+// });
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+// app.get("/about", (req, res) => {
+//   res.render("about");
+// });
 
-app.get("*", (req, res) => {
-  res.render("404");
-});
+// app.get("*", (req, res) => {
+//   res.render("404");
+// });
 
 // app.get("/", (req, res) => {
 //   res.send("<h1>Hello welcome to my home page</h1>");
@@ -441,6 +441,44 @@ app.get("*", (req, res) => {
 //   });
 // });
 
-app.listen(port, () => {
-  console.log(`server is running on ${port}`);
+// app.listen(port, () => {
+//   console.log(`server is running on ${port}`);
+// });
+
+const mongoose = require("mongoose");
+mongoose
+  .connect("mongodb://localhost:27017/ttchannel")
+  .then(() => console.log("connection successfull...."))
+  .catch(() => console.log(err));
+
+// schema
+// a Mongoose schema defines the structure of the document
+// default values, validators, atc..
+
+const playlistSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  ctype: String,
+  videos: Number,
+  author: String,
+  active: Boolean,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
+
+// collection creation
+const Playlist = new mongoose.model("Playlist", playlistSchema);
+
+const reactPlaylist = new Playlist({
+  name: "React JSON",
+  ctype: "Front End",
+  videos: 80,
+  author: "Thapa technical",
+  active: true,
+});
+
+reactPlaylist.save();

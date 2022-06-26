@@ -60,7 +60,6 @@
                 const data = await response.json()
                 const arrData = [data]
 
-                console.log(data)
 
                 city_name.innerText = `${arrData[0].name}, ${arrData[0].sys.country}`
                 temp.innerText = arrData[0].main.temp
