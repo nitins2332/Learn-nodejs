@@ -445,16 +445,52 @@
 //   console.log(`server is running on ${port}`);
 // });
 
-const mongoose = require("mongoose");
-mongoose
-  .connect("mongodb://localhost:27017/ttchannel")
-  .then(() => console.log("connection successfull...."))
-  .catch(() => console.log(err));
+// const mongoose = require("mongoose");
+// mongoose
+//   .connect("mongodb://localhost:27017/ttchannel")
+//   .then(() => console.log("connection successfull...."))
+//   .catch(() => console.log(err));
 
 // schema
 // a Mongoose schema defines the structure of the document
 // default values, validators, atc..
 
+// const playlistSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+//   ctype: String,
+//   videos: Number,
+//   author: String,
+//   active: Boolean,
+//   date: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// });
+
+// collection creation
+// const Playlist = new mongoose.model("Playlist", playlistSchema);
+
+// const reactPlaylist = new Playlist({
+//   name: "React JSON",
+//   ctype: "Front End",
+//   videos: 80,
+//   author: "Thapa technical",
+//   active: true,
+// });
+
+// reactPlaylist.save();
+
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost:27017/ttchannel")
+  .then(() => console.log("connection successful"))
+  .catch((err) => console.log(err));
+
+// create schema
 const playlistSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -470,15 +506,55 @@ const playlistSchema = new mongoose.Schema({
   },
 });
 
-// collection creation
+// create model , collection creation
 const Playlist = new mongoose.model("Playlist", playlistSchema);
 
-const reactPlaylist = new Playlist({
-  name: "React JSON",
-  ctype: "Front End",
-  videos: 80,
-  author: "Thapa technical",
-  active: true,
-});
+// create document or insert
 
-reactPlaylist.save();
+const createDocument = async () => {
+  try {
+    const jsPlaylist = new Playlist({
+      name: "javascript",
+      ctype: "front End",
+      videos: 150,
+      author: "Thapa",
+      active: true,
+    });
+
+    const mongoPlaylist = new Playlist({
+      name: "mongoDB",
+      ctype: "Database",
+      videos: 10,
+      author: "Thapa",
+      active: true,
+    });
+
+    const mongoosePlaylist = new Playlist({
+      name: "Mongoose js",
+      ctype: "Database",
+      videos: 5,
+      author: "Thapa",
+      active: true,
+    });
+
+    const expressPlaylist = new Playlist({
+      name: "express js",
+      ctype: "Back End",
+      videos: 20,
+      author: "Thapa",
+      active: true,
+    });
+
+    const result = await Playlist.insertMany([
+      jsPlaylist,
+      mongoPlaylist,
+      mongoosePlaylist,
+      expressPlaylist,
+    ]);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+createDocument();
