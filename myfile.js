@@ -557,4 +557,15 @@ const createDocument = async () => {
   }
 };
 
-createDocument();
+// createDocument();
+
+const getDocument = async () => {
+  const result = await Playlist.find({ ctype: "front End" })
+    .select({
+      name: 1,
+    })
+    .limit(1);
+  console.log(result);
+};
+
+getDocument();
