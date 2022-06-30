@@ -559,13 +559,68 @@ const createDocument = async () => {
 
 // createDocument();
 
+// const getDocument = async () => {
+//   try {
+//     const result = await Playlist.find({
+//       ctype: { $nin: ["Back End", "Database"] },
+//     }).select({
+//       name: 1,
+//     });
+//     // .limit(1);
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// getDocument();
+
 const getDocument = async () => {
-  const result = await Playlist.find({ ctype: "front End" })
-    .select({
-      name: 1,
-    })
-    .limit(1);
-  console.log(result);
+  try {
+    // logical operator
+    const result = await Playlist.find({ author: "Thapa" })
+      .sort("name : 1")
+      .select({
+        name: 1,
+      });
+    // .limit(1);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-getDocument();
+// getDocument();
+
+const updateDocument = async (_id) => {
+  try {
+    const result = await Playlist.updateOne(
+      { _id },
+      {
+        $set: {
+          name: "react js",
+        },
+      },
+      {
+        new: true,
+        useFindAndModify: false,
+      }
+    );
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// updateDocument("62bd24c00c2f24b5bf1a5d78");
+
+const deleteDocument = async (_id) => {
+  try {
+    const result = await Playlist.deleteOne({ _id });
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+deleteDocument("62bd24c00c2f24b5bf1a5d78");
