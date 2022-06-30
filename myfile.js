@@ -484,6 +484,7 @@
 // reactPlaylist.save();
 
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 mongoose
   .connect("mongodb://localhost:27017/ttchannel")
@@ -495,10 +496,36 @@ const playlistSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    // unique: true,
+    uppercase: true,
+    trim: true,
+    minlength: [2, "minimum 2 letters"],
+    maxlength: 30,
   },
-  ctype: String,
-  videos: Number,
+  ctype: {
+    type: String,
+    required: true,
+    enum: ["frontend", "backend", "database"],
+  },
+  videos: {
+    type: Number,
+    validate(value) {
+      if (value < 0) {
+        throw new Error("videos count should not be negative");
+      }
+    },
+  },
   author: String,
+
+  email: {
+    type: String,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Email is inValid");
+      }
+    },
+  },
+
   active: Boolean,
   date: {
     type: Date,
@@ -513,51 +540,23 @@ const Playlist = new mongoose.model("Playlist", playlistSchema);
 
 const createDocument = async () => {
   try {
-    const jsPlaylist = new Playlist({
-      name: "javascript",
-      ctype: "front End",
-      videos: 150,
-      author: "Thapa",
-      active: true,
-    });
-
-    const mongoPlaylist = new Playlist({
-      name: "mongoDB",
-      ctype: "Database",
-      videos: 10,
-      author: "Thapa",
-      active: true,
-    });
-
     const mongoosePlaylist = new Playlist({
-      name: "Mongoose js",
-      ctype: "Database",
-      videos: 5,
+      name: "nfdfefsfd",
+      ctype: "database",
+      videos: 4,
       author: "Thapa",
+      email: "ns@gmail.co",
       active: true,
     });
 
-    const expressPlaylist = new Playlist({
-      name: "express js",
-      ctype: "Back End",
-      videos: 20,
-      author: "Thapa",
-      active: true,
-    });
-
-    const result = await Playlist.insertMany([
-      jsPlaylist,
-      mongoPlaylist,
-      mongoosePlaylist,
-      expressPlaylist,
-    ]);
+    const result = await Playlist.insertMany([mongoosePlaylist]);
     console.log(result);
   } catch (err) {
     console.log(err);
   }
 };
 
-// createDocument();
+createDocument();
 
 // const getDocument = async () => {
 //   try {
@@ -623,4 +622,4 @@ const deleteDocument = async (_id) => {
   }
 };
 
-deleteDocument("62bd24c00c2f24b5bf1a5d78");
+// deleteDocument("62bd24c00c2f24b5bf1a5d78");
