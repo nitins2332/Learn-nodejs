@@ -483,80 +483,80 @@
 
 // reactPlaylist.save();
 
-const mongoose = require("mongoose");
-const validator = require("validator");
+// const mongoose = require("mongoose");
+// const validator = require("validator");
 
-mongoose
-  .connect("mongodb://localhost:27017/ttchannel")
-  .then(() => console.log("connection successful"))
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect("mongodb://localhost:27017/ttchannel")
+//   .then(() => console.log("connection successful"))
+//   .catch((err) => console.log(err));
 
 // create schema
-const playlistSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    // unique: true,
-    uppercase: true,
-    trim: true,
-    minlength: [2, "minimum 2 letters"],
-    maxlength: 30,
-  },
-  ctype: {
-    type: String,
-    required: true,
-    enum: ["frontend", "backend", "database"],
-  },
-  videos: {
-    type: Number,
-    validate(value) {
-      if (value < 0) {
-        throw new Error("videos count should not be negative");
-      }
-    },
-  },
-  author: String,
+// const playlistSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true,
+// unique: true,
+//     uppercase: true,
+//     trim: true,
+//     minlength: [2, "minimum 2 letters"],
+//     maxlength: 30,
+//   },
+//   ctype: {
+//     type: String,
+//     required: true,
+//     enum: ["frontend", "backend", "database"],
+//   },
+//   videos: {
+//     type: Number,
+//     validate(value) {
+//       if (value < 0) {
+//         throw new Error("videos count should not be negative");
+//       }
+//     },
+//   },
+//   author: String,
 
-  email: {
-    type: String,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error("Email is inValid");
-      }
-    },
-  },
+//   email: {
+//     type: String,
+//     validate(value) {
+//       if (!validator.isEmail(value)) {
+//         throw new Error("Email is inValid");
+//       }
+//     },
+//   },
 
-  active: Boolean,
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+//   active: Boolean,
+//   date: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// });
 
 // create model , collection creation
-const Playlist = new mongoose.model("Playlist", playlistSchema);
+// const Playlist = new mongoose.model("Playlist", playlistSchema);
 
 // create document or insert
 
-const createDocument = async () => {
-  try {
-    const mongoosePlaylist = new Playlist({
-      name: "nfdfefsfd",
-      ctype: "database",
-      videos: 4,
-      author: "Thapa",
-      email: "ns@gmail.co",
-      active: true,
-    });
+// const createDocument = async () => {
+//   try {
+//     const mongoosePlaylist = new Playlist({
+//       name: "nfdfefsfd",
+//       ctype: "database",
+//       videos: 4,
+//       author: "Thapa",
+//       email: "ns@gmail.co",
+//       active: true,
+//     });
 
-    const result = await Playlist.insertMany([mongoosePlaylist]);
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
+//     const result = await Playlist.insertMany([mongoosePlaylist]);
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
-createDocument();
+// createDocument();
 
 // const getDocument = async () => {
 //   try {
@@ -574,52 +574,130 @@ createDocument();
 
 // getDocument();
 
-const getDocument = async () => {
-  try {
-    // logical operator
-    const result = await Playlist.find({ author: "Thapa" })
-      .sort("name : 1")
-      .select({
-        name: 1,
-      });
-    // .limit(1);
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const getDocument = async () => {
+//   try {
+//     // logical operator
+//     const result = await Playlist.find({ author: "Thapa" })
+//       .sort("name : 1")
+//       .select({
+//         name: 1,
+//       });
+//     // .limit(1);
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 // getDocument();
 
-const updateDocument = async (_id) => {
-  try {
-    const result = await Playlist.updateOne(
-      { _id },
-      {
-        $set: {
-          name: "react js",
-        },
-      },
-      {
-        new: true,
-        useFindAndModify: false,
-      }
-    );
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const updateDocument = async (_id) => {
+//   try {
+//     const result = await Playlist.updateOne(
+//       { _id },
+//       {
+//         $set: {
+//           name: "react js",
+//         },
+//       },
+//       {
+//         new: true,
+//         useFindAndModify: false,
+//       }
+//     );
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 // updateDocument("62bd24c00c2f24b5bf1a5d78");
 
-const deleteDocument = async (_id) => {
-  try {
-    const result = await Playlist.deleteOne({ _id });
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const deleteDocument = async (_id) => {
+//   try {
+//     const result = await Playlist.deleteOne({ _id });
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 // deleteDocument("62bd24c00c2f24b5bf1a5d78");
+
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 4000;
+
+const mongoose = require("mongoose");
+const validator = require("validator");
+
+app.use(express.json());
+
+// connect to database
+mongoose
+  .connect("mongodb://localhost:27017/students-api")
+  .then(() => {
+    console.log("connection is succenssful...");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+// create schema for mongo database
+const studentSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
+
+  email: {
+    type: String,
+    required: true,
+    unique: [true, "Email id already present"],
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Invalid Email");
+      }
+    },
+  },
+
+  phone: {
+    type: Number,
+    min: 10,
+    // max: 10,
+    required: true,
+    unique: true,
+  },
+
+  address: {
+    type: String,
+    required: true,
+  },
+});
+
+// create a new collection
+const Student = new mongoose.model("Student", studentSchema);
+
+app.get("/", (req, res) => {
+  res.send("hello user");
+});
+
+app.post("/students", (req, res) => {
+  const user = new Student(req.body);
+  user
+    .save()
+    .then(() => {
+      res.status(201).send(user);
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    });
+  console.log(req.body);
+
+  // res.send("Hello from the other side.");
+});
+
+app.listen(port, () => {
+  console.log(`connection is setup at ${port}`);
+});
