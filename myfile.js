@@ -708,6 +708,32 @@ app.post("/students", async (req, res) => {
   }
 });
 
+// read the data of registered students
+app.get("/students", async (req, res) => {
+  try {
+    const studentsData = await Student.find();
+    res.send(studentsData);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+// get the indivisual student data using id
+app.get("/students/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const studentdata = await Student.findById(_id);
+
+    if (!studentdata) {
+      return res.status(404).send("page not found");
+    } else {
+      res.send(studentdata);
+    }
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`connection is setup at ${port}`);
 });
