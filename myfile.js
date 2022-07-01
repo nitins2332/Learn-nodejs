@@ -683,19 +683,29 @@ app.get("/", (req, res) => {
   res.send("hello user");
 });
 
-app.post("/students", (req, res) => {
-  const user = new Student(req.body);
-  user
-    .save()
-    .then(() => {
-      res.status(201).send(user);
-    })
-    .catch((e) => {
-      res.status(400).send(e);
-    });
-  console.log(req.body);
+// app.post("/students", (req, res) => {
+//   const user = new Student(req.body);
+//   user
+//     .save()
+//     .then(() => {
+//       res.status(201).send(user);
+//     })
+//     .catch((e) => {
+//       res.status(400).send(e);
+//     });
+//   console.log(req.body);
 
-  // res.send("Hello from the other side.");
+// res.send("Hello from the other side.");
+// });
+
+app.post("/students", async (req, res) => {
+  try {
+    const user = new Student(req.body);
+    const createUser = await user.save();
+    res.status(201).send(createUser);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 
 app.listen(port, () => {
