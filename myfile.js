@@ -631,7 +631,10 @@ const port = process.env.PORT || 4000;
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const studentRouter = require("./routers/student");
+
 app.use(express.json());
+app.use(studentRouter);
 
 // connect to database
 mongoose
@@ -643,122 +646,8 @@ mongoose
     console.log(err);
   });
 
-// create schema for mongo database
-const studentSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 3,
-  },
-
-  email: {
-    type: String,
-    required: true,
-    unique: [true, "Email id already present"],
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error("Invalid Email");
-      }
-    },
-  },
-
-  phone: {
-    type: Number,
-    min: 10,
-    // max: 10,
-    required: true,
-    unique: true,
-  },
-
-  address: {
-    type: String,
-    required: true,
-  },
-});
-
-// create a new collection
-const Student = new mongoose.model("Student", studentSchema);
-
 app.get("/", (req, res) => {
-  res.send("hello user");
-});
-
-// app.post("/students", (req, res) => {
-//   const user = new Student(req.body);
-//   user
-//     .save()
-//     .then(() => {
-//       res.status(201).send(user);
-//     })
-//     .catch((e) => {
-//       res.status(400).send(e);
-//     });
-//   console.log(req.body);
-
-// res.send("Hello from the other side.");
-// });
-
-app.post("/students", async (req, res) => {
-  try {
-    const user = new Student(req.body);
-    const createUser = await user.save();
-    res.status(201).send(createUser);
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
-
-// read the data of registered students
-app.get("/students", async (req, res) => {
-  try {
-    const studentsData = await Student.find();
-    res.send(studentsData);
-  } catch (err) {
-    res.send(err);
-  }
-});
-
-// get the indivisual student data using id
-app.get("/students/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const studentdata = await Student.findById(_id);
-
-    if (!studentdata) {
-      return res.status(404).send("page not found");
-    } else {
-      res.send(studentdata);
-    }
-  } catch (err) {
-    res.send(err);
-  }
-});
-
-// update the studens by it id
-app.patch("/students/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const updateStudent = await Student.findByIdAndUpdate(_id, req.body, {
-      new: true,
-    });
-    res.send(updateStudent);
-  } catch (err) {
-    res.status(404).send(err);
-  }
-});
-
-// delete the student by it id
-app.delete("/students/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const deletestudent = await Student.findByIdAndDelete(_id);
-    if (!_id) {
-      return res.status(400).send();
-    }
-    res.send(deletestudent);
-  } catch (err) {
-    res.status(500).send(err);
-  }
+  res.send("hello user go to /students tab");
 });
 
 app.listen(port, () => {
