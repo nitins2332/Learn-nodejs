@@ -75,6 +75,9 @@ app.post("/login", async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, useremail.password);
 
+    const token = await useremail.generateAuthToken();
+    console.log("the token part " + token);
+
     if (isMatch) {
       res.status(201).send("<h1>login successful</h1>");
     } else {
