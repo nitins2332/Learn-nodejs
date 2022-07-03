@@ -92,6 +92,27 @@ const securePassword = async (password) => {
   console.log(matchpassword);
 };
 
+const jwt = require("jsonwebtoken");
+
+const createToken = async () => {
+  const token = await jwt.sign(
+    { _id: "62c19fcbfb418c790fbf1b80" },
+    "mynameisnitinsiknowthisisprivatekeyanditisnotprivate",
+    {
+      expiresIn: "2 mins",
+    }
+  );
+  console.log(token);
+
+  const userVer = await jwt.verify(
+    token,
+    "mynameisnitinsiknowthisisprivatekeyanditisnotprivate"
+  );
+  console.log(userVer);
+};
+
+createToken();
+
 // securePassword("thapa@123");
 
 app.listen(port, () => {
