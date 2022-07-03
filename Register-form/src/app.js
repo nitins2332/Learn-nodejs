@@ -47,7 +47,10 @@ app.post("/register", async (req, res) => {
         confirmpassword: req.body.confirmpassword,
       });
 
-      // password hash
+      // console.log("the success part" + registerEmployee);
+
+      const token = await registerEmployee.generateAuthToken();
+      // console.log("the token part" + token);
 
       const registered = await registerEmployee.save();
       res.status(201).render("thanks");
@@ -92,6 +95,8 @@ const securePassword = async (password) => {
   console.log(matchpassword);
 };
 
+// securePassword("thapa@123");
+
 const jwt = require("jsonwebtoken");
 
 const createToken = async () => {
@@ -111,9 +116,7 @@ const createToken = async () => {
   console.log(userVer);
 };
 
-createToken();
-
-// securePassword("thapa@123");
+// createToken();
 
 app.listen(port, () => {
   console.log(`server is running at port ${port}`);
