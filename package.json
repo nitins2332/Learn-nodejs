@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/nitins2332/Learn-nodejs#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chalk": "^4.1.2",
     "express": "^4.18.1",
     "hbs": "^4.2.0",
